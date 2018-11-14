@@ -4,11 +4,12 @@ import com.zeljko.students2.entity.Course;
 import com.zeljko.students2.entity.Student;
 import com.zeljko.students2.service.CourseService;
 import com.zeljko.students2.service.StudentService;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,6 +17,14 @@ import java.util.Optional;
 
 @Controller
 public class StudentController {
+
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
 
 	private StudentService studentService;
 	private CourseService courseService;

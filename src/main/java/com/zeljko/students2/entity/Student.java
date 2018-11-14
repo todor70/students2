@@ -27,17 +27,17 @@ public class Student {
     private long studentID;
 
     @Column(name="first_name")
-    @NotNull
+    @NotNull(message="is required")
     @Size(min=1, message="is required")
     private String firstName;
 
     @Column(name="last_name")
-    @NotNull
+    @NotNull(message="is required")
     @Size(min=1, message="is required")
     private String lastName;
 
     @Column(name="email")
-    @NotNull
+    @NotNull(message="is required")
     @Size(min=1, message="is required")
     private String email;
 
@@ -53,6 +53,13 @@ public class Student {
 
     public Student() {
 
+    }
+
+    public Student(long studentID, String firstName, String lastName, String email) {
+        this.studentID = studentID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
     public Student(String firstName, String lastName, String email) {
