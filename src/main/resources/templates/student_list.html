@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Studentlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Reference Bootstrap files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="col-md-4">
+        <h2>Student List</h2>
+
+    </div>
+    <div style="padding:0 20px">
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Courses</th>
+                <th>Add Course</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.firstName} + ' ' + ${student.lastName}"></td>
+                <td th:text="${student.email}"></td>
+                <td>
+				<span th:each="course,iterStat : ${student.courses}">
+					<span th:text="${course.title}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				</span>
+                </td>
+                <td><a th:href="@{/addStudentCourse/{id}(id=${student.studentID})}" class="btn btn-primary btn-xs">Add
+                    Course</a></td>
+                <td><a th:href="@{/update/{id}(id=${student.studentID})}" class="btn btn-primary btn-xs">Update</a></td>
+                <td><a th:href="@{/delete/{id}(id=${student.studentID})}" class="btn btn-danger btn-xs">Delete</a></td>
+            </tr>
+        </table>
+        <a th:href="@{/add}" class="btn btn-primary">Add Student</a>
+    </div>
+</div>
+</body>
+</html>

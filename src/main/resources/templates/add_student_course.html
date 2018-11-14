@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Course</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Reference Bootstrap files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add Course</h2>
+    <form th:action="@{/student/{id}/courses(id=${student.studentID})}" method="get" enctype="multipart/form-data">
+        <div>
+            <div class="panel panel-default" style="width: 350px">
+                <div class="panel-heading"><h4>Student Info</h4></div>
+                <div class="panel-body" style="padding-left: 5px;">
+                    Name: <b th:text="${student.firstName}"/> <b th:text="${student.lastName}"/><br/>
+                    Email: <span th:text="${student.email}"/><br/>
+                    <br/>Courses:
+                    <span th:each="course : ${student.courses}">
+					<br/>&nbsp;&nbsp;<span th:text="${course.title}"/>
+				</span>
+                    <br/>
+                </div>
+            </div>
+            <div>
+                <select class="form-control" name="courseId" style="width: 150px">
+                    <option th:each="course : ${courses}"
+                            th:value="${course.courseID}"
+                            th:text="${course.title}">Course
+                    </option>
+                </select>
+            </div>
+            <br>
+            <input type="submit" name="action" class="btn btn-primary" value="Save"/>
+            <input type="submit" name="action" class="btn btn-danger" value="Cancel"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
