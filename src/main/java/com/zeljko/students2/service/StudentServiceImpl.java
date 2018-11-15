@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+//@Transactional
 public class StudentServiceImpl implements StudentService {
 
     private StudentRepository studentRepository;
