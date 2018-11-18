@@ -4,6 +4,7 @@ import com.zeljko.students2.entity.Course;
 import com.zeljko.students2.entity.Student;
 import com.zeljko.students2.service.CourseService;
 import com.zeljko.students2.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class StudentController {
 	private StudentService studentService;
 	private CourseService courseService;
 
+	@Autowired
 	public StudentController(StudentService studentService, CourseService courseService) {
 		this.studentService = studentService;
 		this.courseService = courseService;
