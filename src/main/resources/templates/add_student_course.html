@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Add Course</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -7,8 +8,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+
+        .navbar {
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+    </style>
+
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Students and Courses</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/students}">Student List</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <form th:action="@{/logout}"
+                      method="POST">
+                    <input type="submit" value="Logout" class="btn btn-danger navbar-btn" role="button"
+                           aria-pressed="true"/>
+                </form>
+            </li>
+            <li class="navbar-text">User:
+                <span sec:authentication="principal.username"></span>
+                , Role:
+                <span sec:authentication="principal.authorities"></span></li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
     <h2>Add Course</h2>
     <form th:action="@{/student/{id}/courses(id=${student.studentID})}" method="get" enctype="multipart/form-data">
