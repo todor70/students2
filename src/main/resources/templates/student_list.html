@@ -23,7 +23,7 @@
         $(document).ready(function () {
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $("#searchTable tbody tr").filter(function () {
+                $("#searchTable tr").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
@@ -67,8 +67,9 @@
         <h2>Student List</h2>
     </div>
     <div style="padding:0 20px">
-        <table id="searchTable" class="table table-striped">
-            <thead>
+        <table class="table table-striped">
+
+            <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Courses</th>
@@ -77,9 +78,10 @@
                 <th>Update</th>
                 <th>Delete</th>
             </span>
-            </thead>
+            </tr>
 
-            <tbody>
+
+            <tbody id="searchTable">
             <tr th:each="student : ${students}">
                 <td th:text="${student.firstName} + ' ' + ${student.lastName}"></td>
                 <td th:text="${student.email}"></td>
