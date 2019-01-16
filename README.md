@@ -1,5 +1,5 @@
 # students2
-Spring Boot CRUD with H2 database, many to many relationship and Thymeleaf
+Spring Boot CRUD with security (In-memory Authentication), H2 database, many to many relationship and Thymeleaf
 
 ![](images/login1.png)
 ![](images/logout.png)
