@@ -35,20 +35,20 @@ public class StudentController {
 		this.courseService = courseService;
 	}
 
-	@RequestMapping("/students")
+	@GetMapping("/students")
 	public String list(Model model) {
 		List<Student> students = studentService.getAllStudents();
 		model.addAttribute("students", students);
 		return "student_list";
 	}
 
-	@RequestMapping(value = "/add")
+	@GetMapping("/add")
 	public String addStudent(Model model){
 		model.addAttribute("student", new Student());
 		return "add_student";
 	}
 
-	@RequestMapping(value = "/update/{id}")
+	@GetMapping("/update/{id}")
 	public String updateStudent(@PathVariable("id") Long studentId, Model model){
 		model.addAttribute("student", studentService.getStudentById(studentId));
 		return "update_student";
