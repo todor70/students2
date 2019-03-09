@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +54,7 @@ public class StudentController {
 		return "update_student";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@PostMapping("/save")
 	public String save(@Valid Student student, BindingResult theBindingResult){
 
 		if (theBindingResult.hasErrors()) {
@@ -67,7 +65,7 @@ public class StudentController {
 		return "redirect:/students";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@PostMapping("/update")
 	public String update(@Valid Student student, BindingResult theBindingResult){
 
 		if (theBindingResult.hasErrors()) {
@@ -78,13 +76,13 @@ public class StudentController {
 		return "redirect:/students";
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String deleteStudent(@PathVariable("id") Long studentId, Model model) {
+	@GetMapping("/delete/{id}")
+	public String deleteStudent(@PathVariable("id") Long studentId) {
 		studentService.deleteStudentById(studentId);
 		return "redirect:/students";
 	}
 
-	@RequestMapping(value = "/addStudentCourse/{id}", method = RequestMethod.GET)
+	@GetMapping("/addStudentCourse/{id}")
 	public String addCourse(@PathVariable("id") Long studentId, Model model){
 
 		model.addAttribute("courses", courseService.getAllCourses());
@@ -93,7 +91,7 @@ public class StudentController {
 	}
 
 
-	@RequestMapping(value="/student/{id}/courses", method= RequestMethod.GET)
+	@GetMapping("/student/{id}/courses")
 	public String studentsAddCourse(@RequestParam(value="action", required=true) String action, @PathVariable Long id, @RequestParam Long courseId, Model model) {
 		Optional<Course> course = courseService.getCourseById(courseId);
 		Optional<Student> student = studentService.getStudentById(id);
